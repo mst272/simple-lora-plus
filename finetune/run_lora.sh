@@ -3,7 +3,7 @@ OUTPUT_PATH=""
 MODEL="deepseek-ai/deepseek-coder-6.7b-instruct"
 MODEL_PATH="../deepseek-ai/deepseek-coder-6.7b-instruct"
 
-cd finetune && nohup deepspeed --include localhost:1,2 finetune_lora.py \
+cd finetune && nohup deepspeed --include localhost:1 finetune_lora.py \
     --model_name_or_path $MODEL_PATH \
     --data_path $DATA_PATH \
     --output_dir $OUTPUT_PATH \
