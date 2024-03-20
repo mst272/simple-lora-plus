@@ -17,27 +17,10 @@ logger = logging.get_logger(__name__)
 # LayerNorm层及bias等不需要进行weight decay
 # ALL_LAYERNORM_LAYERS = [nn.LayerNorm, LlamaRMSNorm]
 
+# 论文中的推荐相关参数设置
 LORA_LR_RATIO = 16
 LORA_LR_EMBEDDING = 1e-6
 WEIGHT_DECAY = 0.0
-
-# todo:只能用一个HfArgumentParser集成，后续需要修改
-@dataclass
-class LoraPlusArg:
-    lora_lr_ratio: Optional[float] = field(
-        default=None, metadata={"help": "loraplus learning rate ratio lr_B / lr_A."}
-    )
-    lora_lr_embedding: Optional[float] = field(
-        default=1e-6, metadata={"help": "loraplus learning rate for lora embedding layers."}
-    )
-    weight_decay: Optional[float] = field(
-        default=0.0, metadata={"help": "loraplus weight decay"}
-    )
-
-
-# lora+ 的相关参数
-parse = HfArgumentParser(LoraPlusArg)
-args = parse.parse_args_into_dataclasses()[0]
 
 
 def get_modules(name, model):
